@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/pokeball-182.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <title>Pokedex</title>
+</head>
+<body onload="fetchAllPokemonNames()">
+    <header>
+        <div class="ctn">
+            <div class="title">
+                <img src="./img/pokeball-182.png" alt="Pokeball">
+                <p>Pokedex</p>
+            </div>
+            <div class="input_ctn">
+                <input oninput="getFilter()" type="text" name="search" id="search">
+                <img src="./img/icons8-filter-50.png" alt="Filter">
+            </div>
+        </div>
+    </header>
+    <main>
+        <div id="cards_area" class="ctn">
+            <!-- <div class="card">
+                <div class="card_header">
+                    <span id="number_pokemon">#1</span>
+                    <span id="name_pokemon">Bulbasaur</span>
+                </div>
+                <div class="card_img_pokemon_ctn">
+                    <img class="card_img_pokemon" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
+                </div>
+                <div class="card_footer">
+                    <img class="icon_type_of_pokemon" src="./img/types/bug.svg" alt="Blatt">
+                    <img class="icon_type_of_pokemon" src="./img/types/dark.svg" alt="Feuer">
+                </div>
+            </div> -->
+        </div>
+        <div id="show_more" class="0" onclick="showMore()">+</div>
+    </main>
+  
+    <footer>
+        <div class="ctn">
+            © Sabrina Fritz 2024
+        </div>
+    </footer>
+    <div onclick="closeOverlay(event)" id="card_overlay_ctn" class="card_overlay_ctn">
+        <div id="card_overlay" class="card_overlay">
+            <div id="card_overlay_header" class="card_overlay_header">
+                <span id="overlay_number_pokemon">#1</span>
+                <span id="overlay_name_pokemon">Bulbasaur</span>
+            </div>
+            <div id="overlay_card_img_pokemon_ctn" class="overlay_card_img_pokemon_ctn">
+                <img class="buttonLeftRight" onclick="oneLeftOrRight(event, -1, filteredPokemon)" id="toLeft" src="./img/arrow3left.png" alt="arrow to left">  
+                <img class="imgOverlay" id="imgOverlay" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
+                <img class="buttonLeftRight" onclick="oneLeftOrRight(event, 1, filteredPokemon)" id="toRight" src="./img/arrow3right.png" alt="arrow to right">
+            </div>
+            <div id="overlay_card_type_of_pokemon_ctn" class="overlay_card_type_of_pokemon_ctn">
+                <img class="icon_type_of_pokemon" src="" alt="">
+                <img class="icon_type_of_pokemon" src="" alt="">
+            </div>
+            <div class="overlay_card_menu">
+                <div onclick="showOverlayInfoMain()" id="overlay_menu_main" class="overlay_menu_main overlay_menu_link">main</div>
+                <div onclick="showOverlayInfoStats()" id="overlay_menu_stats" class="overlay_menu_stats overlay_menu_link">stats</div>
+                <div onclick="showOverlayInfoEvo()" id="overlay_menu_evochain" class="overlay_menu_evochain overlay_menu_link">evo chain</div>
+            </div>
+            <div id="overlay_card_info" class="overlay_card_info">
+                <div id="overlay_info_main" class="overlay_info_main">
+                    <div class="height">
+                        <span class="description">Height</span>
+                        <span id="height" class="value">0.6 m</span>
+                    </div>
+                    <div class="weight">
+                        <span class="description">Weight</span>
+                        <span id="weight" class="value">8.5 kg</span>
+                    </div>
+                    <div class="base_exp">
+                        <span class="description">Base experience</span>
+                        <span id="base_exp" class="value">62</span>
+                    </div>
+                    <div class="abilities">
+                        <span class="description">Abilities</span>
+                        <span id="abilities" class="value">blaze,solar-power</span>
+                    </div>
+                </div>
+                <div id="overlay_info_stats" class="overlay_info_stats">
+                    <div id="stat1" class="hp">
+                        <span id="stat1name"></span>
+                        <div class="process_line">
+                            <div id="stat1baseStat" class="line_to_fill"></div>                        
+                        </div>
+                    </div>
+                    <div id="stat2" class="attack">
+                        <span id="stat2name"></span>
+                        <div class="process_line">
+                            <div id="stat2baseStat" class="line_to_fill"></div>                        
+                        </div>
+                    </div>
+                    <div id="stat3" class="attack">
+                        <span id="stat3name"></span>
+                        <div class="process_line">
+                            <div id="stat3baseStat" class="line_to_fill"></div>                        
+                        </div>
+                    </div>
+                    <div id="stat4" class="attack">
+                        <span id="stat4name"></span>
+                        <div class="process_line">
+                            <div id="stat4baseStat" class="line_to_fill"></div>                        
+                        </div>
+                    </div>
+                    <div id="stat5" class="attack">
+                        <span id="stat5name"></span>
+                        <div class="process_line">
+                            <div id="stat5baseStat" class="line_to_fill"></div>                        
+                        </div>
+                    </div>
+                    <div id="stat6" class="attack">
+                        <span id="stat6name"></span>
+                        <div class="process_line">
+                            <div id="stat6baseStat" class="line_to_fill"></div>                        
+                        </div>
+                    </div>
+                </div>
+                <div id="evo_chain" class="evo_chain">
+                    <div class="evo_chain_ctn">
+                        <div id="evo_pokemon" class="evo_pokemon pokemon_joung">
+                            <img id="evo1PokemonImg" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
+                            <span id="evo1PokemonName">Charmander</span>
+                        </div>
+                        <!-- <span>>></span> -->
+                        <div class="evo_pokemon pokemon_middle">
+                            <img id="evo2PokemonImg" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
+                            <span id="evo2PokemonName">Charmeleon</span>
+                        </div>
+                        <!-- <span>>></span> -->
+                        <div class="evo_pokemon pokemon_adult">
+                            <img id="evo3PokemonImg" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
+                            <span id="evo3PokemonName">Charizard</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loadingspinner_ctn" class="loadingspinner_ctn">
+        <img id="loading_img" src="./img/pokeball-182.png" alt="Pokeball">
+        <p id="loading_text"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
