@@ -66,6 +66,10 @@ header {
                 &:focus {
                     box-shadow: 0 0 5px rgb(29, 36, 58) inset;
                 }
+
+                &::placeholder {
+                    color: var(--placeholder-color, gray);
+                }
             }
             & img {
                 position: absolute;

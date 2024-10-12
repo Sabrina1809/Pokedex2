@@ -15,7 +15,7 @@
                 <p>Pokedex</p>
             </div>
             <div class="input_ctn">
-                <input oninput="getFilter()" type="text" name="search" id="search">
+                <input onkeydown="if(event.key === 'Enter') getFilter()" placeholder="mind. 3 Zeichen" type="text" name="search" id="search">
                 <img src="./img/icons8-filter-50.png" alt="Filter">
             </div>
         </div>
@@ -146,7 +146,9 @@
         <img id="loading_img" src="./img/pokeball-182.png" alt="Pokeball">
         <p id="loading_text"></p>
     </div>
-
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <script src="./script/filter.js" defer></script>
+   
+   
 </body>
 </html>
