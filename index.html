@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="/img/pokeball-182.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/pokeball-182.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>Pokedex</title>
 </head>
@@ -36,7 +36,7 @@
                 </div>
             </div> -->
         </div>
-        <div id="show_more" class="0" onclick="showMore()">+</div>
+        <div id="show_more" class="0" onclick="showMore(pokemonArrayToShow)">+</div>
     </main>
   
     <footer>
@@ -51,9 +51,9 @@
                 <span id="overlay_name_pokemon">Bulbasaur</span>
             </div>
             <div id="overlay_card_img_pokemon_ctn" class="overlay_card_img_pokemon_ctn">
-                <img class="buttonLeftRight" onclick="oneLeftOrRight(event, -1, filteredPokemon)" id="toLeft" src="./img/arrow3left.png" alt="arrow to left">  
+                <img class="buttonLeftRight" onclick="oneLeftOrRight(event, -1, pokemonArrayToShow)" id="toLeft" src="./img/arrow3left.png" alt="arrow to left">  
                 <img class="imgOverlay" id="imgOverlay" src="./img/icons8-pikachu-pokemon-100.png" alt="Pokemon">
-                <img class="buttonLeftRight" onclick="oneLeftOrRight(event, 1, filteredPokemon)" id="toRight" src="./img/arrow3right.png" alt="arrow to right">
+                <img class="buttonLeftRight" onclick="oneLeftOrRight(event, 1, pokemonArrayToShow)" id="toRight" src="./img/arrow3right.png" alt="arrow to right">
             </div>
             <div id="overlay_card_type_of_pokemon_ctn" class="overlay_card_type_of_pokemon_ctn">
                 <img class="icon_type_of_pokemon" src="" alt="">
@@ -146,9 +146,10 @@
         <img id="loading_img" src="./img/pokeball-182.png" alt="Pokeball">
         <p id="loading_text"></p>
     </div>
-    <script src="script.js" defer></script>
-    <script src="./script/filter.js" defer></script>
    
+    <script src="./script/unfilteredPokemon.js"></script>
+    <script src="./script/filteredPokemon.js"></script>
+    <script src="script.js"></script>
    
 </body>
 </html>
